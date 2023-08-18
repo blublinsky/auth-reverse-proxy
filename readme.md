@@ -69,3 +69,15 @@ which returns jwt token, that can be used in the subsequent request
 curl http://localhost:9090/hello -H "jwt-token: <token>"
 ````
 the request will be forwarded  to the actial [server](cmd/server/server.go)
+
+## Using HTTPS
+
+The same proxy can be used for TLS-terminating of the client's request. For more details reffer to this
+[blog post](https://eli.thegreenplace.net/2022/go-and-proxy-servers-part-2-https-proxies/) and this
+[gist](https://gist.github.com/matishsiao/8270e18923d8f78f56c2). Note that in this case 
+`ListenAndServeTLS` is used which requires certificate
+
+## Supporting GRPC
+
+Supporting GRPC is by far more complex. Some examples of such implementation can be found 
+[here](https://earthly.dev/blog/golang-grpc-gateway/) and [here](https://github.com/mwitkow/grpc-proxy)
