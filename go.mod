@@ -1,8 +1,10 @@
-module github.com/angelbarrera92/basic-auth-reverse-proxy
+module github.com/auth-reverse-proxy
 
-go 1.12
+go 1.20
 
 require (
-	gopkg.in/urfave/cli.v1 v1.20.0
-	gopkg.in/yaml.v2 v2.2.2
+	github.com/golang-jwt/jwt/v4 v4.5.0
+	k8s.io/klog/v2 v2.100.1
 )
+
+require github.com/go-logr/logr v1.2.0 // indirect
