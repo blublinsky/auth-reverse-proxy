@@ -18,9 +18,9 @@ func main() {
 
 	proxy := httputil.NewSingleHostReverseProxy(remote)
 //	http.HandleFunc("/", auth.TokenAuthfunc(proxy, remote))
-//	http.HandleFunc("/", auth.BasicAuthfunc(proxy, remote))
-	http.HandleFunc("/signon", auth.JWTSignOn())
-	http.HandleFunc("/", auth.JWTAuthfunc(proxy, remote))
+	http.HandleFunc("/", auth.BasicAuthfunc(proxy, remote))
+//	http.HandleFunc("/signon", auth.JWTSignOn())
+//	http.HandleFunc("/", auth.JWTAuthfunc(proxy, remote))
 	err = http.ListenAndServe(":9090", nil)
 	if err != nil {
 		panic(err)

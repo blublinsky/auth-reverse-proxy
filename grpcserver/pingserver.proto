@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package grpcserver.pingproto;
+option go_package="github.com/auth-reverse-proxy/grpcserver";
+
+import "google/protobuf/empty.proto";
+
+message PingRequest {
+  string value = 1;
+}
+
+message PingResponse {
+  string value = 1;
+  int32 counter = 2;
+}
+
+service PingService {
+  rpc PingEmpty(google.protobuf.Empty) returns (PingResponse) {}
+
+  rpc Ping(PingRequest) returns (PingResponse) {}
+
+  rpc PingError(PingRequest) returns (google.protobuf.Empty) {}
+}

@@ -2,8 +2,15 @@ package auth
 
 import (
 	"net/http"
+	"net/http/httputil"
 	"net/url"
 )
+
+type authorization struct {
+	proxy    *httputil.ReverseProxy
+	prefix   string
+	upstream *url.URL
+}
 
 // Create Unauthorised response
 func WriteUnauthorisedResponse(w http.ResponseWriter) {
