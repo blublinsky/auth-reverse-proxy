@@ -5,17 +5,29 @@ import (
 	"net/http/httputil"
 	"net/url"
 	"strings"
+	"io"
 
 	"k8s.io/klog/v2"
 )
 
 const (
-	token_header = "Authorization"
+	token_header = "authorization"
 )
 
 type tokenAuth struct {
 	authorization
 	token string
+}
+
+func introspectRequest(r *http.Request){
+	klog.Info("Method: ", r.Method)
+    klog.Info("URL: ", r.URL)
+    klog.Info("Header: ", r.Header)
+    klog.Info("Content-Type: ", r.Header.Get("Content-Type"))
+
+	body, _ := io.ReadAll(r.Body)
+    defer r.Body.Close()
+    klog.Info("Body: ", body)
 }
 
 func NewTokenAuth(token string, proxy *httputil.ReverseProxy, prefix string, upstream *url.URL) tokenAuth {

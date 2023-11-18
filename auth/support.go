@@ -4,6 +4,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"io"
+	"bytes"
 )
 
 type authorization struct {
@@ -36,4 +38,7 @@ func modifyRequest(r *http.Request, upstream *url.URL) {
 	r.URL.Scheme = upstream.Scheme
 	r.Header.Set("X-Forwarded-Host", r.Host)
 	r.Host = upstream.Host
+	body, _ := io.ReadAll(r.Body)
+	defer r.Body.Close()
+	r.Body = io.NopCloser(bytes.NewReader(body))
 }
